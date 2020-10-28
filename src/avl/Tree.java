@@ -2,6 +2,13 @@ package avl;
 
 import java.util.Collection;
 
+/**
+ * Gir standard implementeringer til AVLTree'et.
+ *
+ * Her blir det noen ubrukte metoder siden vi extender Collection, inOrder er brukt i en liten test applikasjon.
+ *
+ */
+
 public interface Tree<E> extends Collection<E> {
 
 

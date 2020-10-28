@@ -1,5 +1,9 @@
 package avl;
 
+import javafx.geometry.Insets;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -8,16 +12,23 @@ import javafx.scene.text.Text;
 
 import java.util.Arrays;
 
+/**
+ * View klasse.
+ * Oppretter et den grafiske delen av oppgaven, den har en instans av AVL-klassen. Her legges verdiene inn i treet og tegner det.
+ */
+
 public class AVLView extends Pane {
 
     private AVLTree<Integer> tree = new AVLTree<>();
-    private final double radius = 15;
-    private final double vGap = 50;
+    private final double RADIUS = 20;
+    private final double VGAP = 60;
 
     private Circle circle;
 
+
     public AVLView(AVLTree<Integer> tree) {
         this.tree = tree;
+        this.setBackground(new Background(new BackgroundFill(Color.WHITESMOKE, CornerRadii.EMPTY, Insets.EMPTY)));
         setStatus("Tree is empty");
     }
 
@@ -25,34 +36,47 @@ public class AVLView extends Pane {
         getChildren().add(new Text(20, 20, s));
     }
 
+    /**
+     *  Tegner treet med rekursjon
+     */
     public void displayTree() {
         this.getChildren().clear();
         if (tree.getRoot() != null)
-            displayTree(tree.getRoot(), getWidth() / 2, vGap, getWidth() / 4);
+            displayTree(tree.getRoot(), getWidth() / 2, VGAP, getWidth() / 4);
     }
 
+    /**
+     * Tegner subtre ut i fra x, y
+     *
+     * @param root rot noden
+     * @param x bruker bredde / 2 av vindu som inn param
+     * @param y VGAP (finn en passelig størrelse)
+     * @param hGap bruker høyde / 4 av vindu som inn param, og hGap/2 for å tegne
+     */
     private void displayTree(AVLTree.AVLTreeNode<Integer> root, double x, double y, double hGap) {
         if (root.left != null) {
-            // Draw a line to the left node
-            getChildren().add(new Line(x - hGap, y + vGap, x, y));
-            // Draw the left subtree recursively
-            displayTree(root.left, x - hGap, y + vGap, hGap / 2);
+
+            getChildren().add(new Line(x - hGap, y + VGAP, x, y));
+            displayTree(root.left, x - hGap, y + VGAP, hGap / 2);
         }
 
         if (root.right != null) {
-            // Draw a line to the right node
-            getChildren().add(new Line(x + hGap, y + vGap, x, y));
-            // Draw the right subtree recursively
-            displayTree(root.right, x + hGap, y + vGap, hGap / 2);
+
+            getChildren().add(new Line(x + hGap, y + VGAP, x, y));
+            displayTree(root.right, x + hGap, y + VGAP, hGap / 2);
         }
 
-        // Display a node
-        circle = new Circle(x, y, radius);
+
+        circle = new Circle(x, y, RADIUS);
         circle.setFill(Color.WHITE);
-        circle.setStroke(Color.BLACK);
+        circle.setStroke(Color.RED);
         getChildren().addAll(circle, new Text(x - 4, y + 4, root.element + ""));
     }
 
+    /**
+     * Henter ut 10 tilfeldige verdier og legger det til et nytt tre,
+     * viser treet ved å kalle displayTree().
+     */
     public void displayRandom() {
         this.getChildren().clear();
         tree.clear();
@@ -60,7 +84,7 @@ public class AVLView extends Pane {
         tree.addAll(Arrays.asList(tree.randomIntegers()));
 
         if (tree.getRoot() != null)
-            displayTree(tree.getRoot(), getWidth() / 2, vGap, getWidth() / 4);
+            displayTree(tree.getRoot(), getWidth() / 2, VGAP, getWidth() / 4);
 
     }
 

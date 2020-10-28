@@ -1,14 +1,19 @@
 package avl;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+/**
+ *  Kontroller klassen, styrer / sender input videre.
+ */
 
 public class AVLAnimation extends Application {
     @Override
@@ -20,16 +25,18 @@ public class AVLAnimation extends Application {
         pane.setCenter(view);
 
         TextField tfKey = new TextField();
-        tfKey.setPrefColumnCount(3);
+        tfKey.setPrefColumnCount(5);
         tfKey.setAlignment(Pos.BASELINE_RIGHT);
         Button btInsert = new Button("Insert");
         Button btDelete = new Button("Delete");
         Button btRandom = new Button("Random_10");
         Button btSearch = new Button("Search");
+        Button btKth = new Button("kTh element");
         HBox hBox = new HBox(5);
-        hBox.getChildren().addAll(new Label("Enter a key: "), tfKey, btSearch, btInsert, btDelete,btRandom);
+        hBox.setBackground(new Background(new BackgroundFill(Color.WHITESMOKE, CornerRadii.EMPTY, Insets.EMPTY)));
+        hBox.getChildren().addAll(new Label("Enter a key: "), tfKey, btSearch, btInsert, btDelete, btRandom, btKth);
         hBox.setAlignment(Pos.CENTER);
-        pane.setBottom(hBox);
+        pane.setTop(hBox);
 
 
 
@@ -62,6 +69,7 @@ public class AVLAnimation extends Application {
         btRandom.setOnAction(e -> {
             view.displayRandom();
             view.setStatus("10 random integers added");
+            view.displayTree();
         });
 
         btSearch.setOnAction(e -> {
@@ -74,6 +82,12 @@ public class AVLAnimation extends Application {
                 view.displayTree();
                 view.setStatus(key + " is in the tree");
             }
+        });
+
+        btKth.setOnAction(e -> {
+            int key = Integer.parseInt(tfKey.getText());
+            view.displayTree();
+            view.setStatus(key + "(th) smallest number is " + tree.find(key));
         });
 
 
