@@ -5,7 +5,7 @@ AVL tree animation (JavaFX) - Obligatorisk Oppgave
 Lite program som lar deg sette inn, slette og finne elementer i et AVL-tre. Generic, men test applikasjonen bruker Integers.<br/> 
 
 Det skal utviklast ein applikasjon der brukaren kan legge inn tal i eit AVL-tre. For kvar endring skal treet teiknast i applikasjonen.<br/>
-<b>Oppgave tekst:</b>
+<b>Oppgave tekst:</b><br/>
 Det er altså to hovuddelar. Den eine er å implementere ei generisk AVL-klasse som held treet balansert under innsetting. Dette er avskrift av AVLTree i læreboka. Den andre delen er ein grafisk applikasjon som opprettar ein instans av AVL-klassa, som gjer det mogeleg å legge inn verdiar i treet, og som heile tida teiknar ut treet. Du finn mykje kode i kapittel 25 som kan nyttast.
 
 Du skal fylgje MVC-prinsippet (Model-View-Controller) på det viset at AVLTree og AVLTreeNode skal ikkje drive operasjonar mot det grafiske grensesnittet. Dersom du treng å "opne" klassene noko for å få teikna ut så kan du det, men pass på at du ikkje opnar meire enn naudsynt.
