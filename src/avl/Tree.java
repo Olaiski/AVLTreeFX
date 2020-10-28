@@ -42,12 +42,17 @@ public interface Tree<E> extends Collection<E> {
     }
 
     @Override
-    default boolean containsAll(Collection<?> collection) {
-        return false;
+    default boolean addAll(Collection<? extends E> collection) {
+        boolean mod = false;
+        for (E value : collection) {
+            if (add(value))
+                mod = true;
+        }
+        return mod;
     }
 
     @Override
-    default boolean addAll(Collection<? extends E> collection) {
+    default boolean containsAll(Collection<?> collection) {
         return false;
     }
 

@@ -6,11 +6,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
+import java.util.Arrays;
+
 public class AVLView extends Pane {
 
     private AVLTree<Integer> tree = new AVLTree<>();
-    private double radius = 15;
-    private double vGap = 50;
+    private final double radius = 15;
+    private final double vGap = 50;
 
     private Circle circle;
 
@@ -54,11 +56,8 @@ public class AVLView extends Pane {
     public void displayRandom() {
         this.getChildren().clear();
         tree.clear();
-        Integer[] intArr = tree.randomIntegers();
 
-        for (Integer integer : intArr) {
-            tree.insert(integer);
-        }
+        tree.addAll(Arrays.asList(tree.randomIntegers()));
 
         if (tree.getRoot() != null)
             displayTree(tree.getRoot(), getWidth() / 2, vGap, getWidth() / 4);

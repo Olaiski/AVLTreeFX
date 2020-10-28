@@ -1,12 +1,14 @@
 package avl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 public class AVLTree<E extends Comparable<E>> implements Tree<E> {
 
     private final int MAX_RANDOM_INTEGERS = 10;
-    private final int RANDOM_RANGE = 150;
+    private final int RANDOM_RANGE = 200;
 
     protected AVLTreeNode<E> root;
     protected int size;
@@ -334,11 +336,18 @@ public class AVLTree<E extends Comparable<E>> implements Tree<E> {
 
     public Integer[] randomIntegers() {
         Integer[] intArr = new Integer[MAX_RANDOM_INTEGERS];
-        for (int i = 0; i < intArr.length; i++) {
-            intArr[i] = (int) (Math.random() * RANDOM_RANGE);
+        ArrayList<Integer> intList = new ArrayList<>();
+
+        for (int i = 0; i <= RANDOM_RANGE; i++) {
+            intList.add(i);
         }
+        Collections.shuffle(intList);
+
+        intArr = intList.subList(0, MAX_RANDOM_INTEGERS).toArray(intArr);
+
         return intArr;
     }
+
 
 
     @Override
@@ -413,8 +422,6 @@ public class AVLTree<E extends Comparable<E>> implements Tree<E> {
             this.element = e;
         }
 
-        public int getSize() {
-            return size;
-        }
+
     }
 }
